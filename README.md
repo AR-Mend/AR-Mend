@@ -15,17 +15,18 @@ pnpm preview
 The production output is `dist/`. Deploy this directory to any static host (Cloudflare Pages, Netlify, Vercel, or Sites). No server environment variables are required. Optional: set `VITE_CONTACT_EMAIL` in `.env` before building to display your actual contact email. The form validates locally and never transmits or stores data.
 
 ## Brain assets and licensing
-The original procedural brain in `src/scenes/BrainScene.jsx` consists of bilateral sculpted ellipsoids, winding tubular folds, and a simplified stem. It is a stylized visualization, not a medically accurate anatomical reference. All graphics are generated in code; no external images, fonts, or 3D assets are used. Third-party dependencies retain their respective package licenses.
+The hero and storytelling now use the textured GLB supplied in human-brain.zip, served from `public/models/human-brain.glb`. Its 2,605 vertices and 4,850 triangles retain the embedded diffuse and normal textures. A compatibility conversion replaces the legacy specular/gloss extension with core glTF shading. The model is a visualization, not a medically accurate anatomical reference. The archive did not include author or license information; provenance is recorded in `public/models/ASSET-NOTES.md`. Third-party dependencies retain their respective package licenses.
 
-To replace the brain with a licensed GLB: place the optimized asset in `public/models/brain.glb`, import `useGLTF` from Drei, load it in `Model`, and replace the procedural meshes with `<primitive object={scene} />`. Adjust scale and orientation to fit the current camera. Retain the asset author's required attribution and license. Draco-compressed files need a matching decoder configuration. Keep surface/wireframe mode materials compatible with replacement meshes.
+To replace the model again, place a self-contained, core glTF-compatible GLB at `public/models/human-brain.glb`. `Model` in `src/scenes/BrainScene.jsx` loads it through Drei useGLTF, clones materials per scene, and centers/scales its bounds automatically. Adjust the surrounding group rotation if a replacement has different orientation. Preserve its required license and attribution. For the original supplied archive, `node scripts/prepare-brain.mjs` converts legacy materials after extracting the GLB.
 
 ## Motion and accessibility
 Lenis is the single smooth-scroll controller and updates GSAP ScrollTrigger through its ticker; cleanup removes the ticker and scroll controller. Desktop storytelling pins and scrubs seven stages. Touch/narrow layouts use natural flow and explicit stage buttons. Reduced motion disables pinning, smoothing, continuous scene updates, and CSS transitions. Native links, labels, FAQ details, visible focus, validation errors, live status, and a skip link support keyboard and assistive technology users.
 
-The 3D scene is lazy loaded, limits pixel ratio to 1.5, uses restrained bloom, and stops continuous frames when offscreen. WebGL failures use a static icon fallback. Geometry is generated locally and disposed on unmount. For lower-powered devices, disable postprocessing or reduce fold/tube segmentation. Browser and device-specific WebGL support still varies.
+The 3D scene is lazy loaded, limits pixel ratio to 1.5, uses restrained bloom, and stops continuous frames when offscreen. WebGL failures use a static icon fallback. GLB geometry and textures are cached across scenes; scene-specific material clones are disposed on unmount. For lower-powered devices, disable postprocessing or reduce texture resolution. Browser and device-specific WebGL support still varies.
 
 ## Project map
 `src/main.jsx` contains reusable presentation sections and form/navigation behavior. `src/scenes/BrainScene.jsx` owns 3D rendering. `src/styles.css` owns visual tokens and responsive styles. `DESIGN.md` records design intent.
 
 ## Scope
 No clinical validation is claimed. This project is not a medical device, does not provide diagnosis or medical advice, and does not replace professional evaluation. The separate referenced project-plan attachment was not provided; implementation follows the full pasted specification.
+

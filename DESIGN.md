@@ -9,4 +9,4 @@ Runtime tokens live in src/styles.css: ink #05080D, navy #0A1422, cyan #00E5FF, 
 Real anchor navigation, active section indicator, mobile disclosure menu, keyboard-accessible viewing modes, native FAQ disclosures. Contact is a clearly labeled local demo; no message is transmitted. No invented clinical claims or statistics. Reduced motion disables smooth scrolling, continuous scene motion, and pinned storytelling. Mobile retains the brain and uses natural document flow.
 
 ## Assets
-Brain geometry and diagrams are generated locally. No external asset licenses or network-loaded fonts required. The model is anatomically inspired and not an anatomical reference.
+The hero and storytelling use the user's human-brain.zip GLB, with embedded textures and core glTF material conversion. Other diagrams are generated locally. No network-loaded fonts. No author or license was included in the supplied archive; provenance is recorded in public/models/ASSET-NOTES.md. The model is a visualization and not an anatomical reference.
