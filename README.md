@@ -15,6 +15,8 @@ pnpm preview
 The production output is `dist/`. Deploy this directory to any static host (Cloudflare Pages, Netlify, Vercel, or Sites). No server environment variables are required. Optional: set `VITE_CONTACT_EMAIL` in `.env` before building to display your actual contact email. The form validates locally and never transmits or stores data.
 
 ## Brain assets and licensing
+The supplied AR MEND logo is preserved in `public/branding/ar-mend-logo.jpg` and displayed by the shared header/footer Brand component. The site palette follows its black, violet, and lavender colors. Primary CSS accent tokens also drive the 3D lighting and wireframe accent. The favicon uses the same logo image.
+
 The hero and storytelling now use the textured GLB supplied in human-brain.zip, served from `public/models/human-brain.glb`. Its 2,605 vertices and 4,850 triangles retain the embedded diffuse and normal textures. A compatibility conversion replaces the legacy specular/gloss extension with core glTF shading. The model is a visualization, not a medically accurate anatomical reference. The archive did not include author or license information; provenance is recorded in `public/models/ASSET-NOTES.md`. Third-party dependencies retain their respective package licenses.
 
 To replace the model again, place a self-contained, core glTF-compatible GLB at `public/models/human-brain.glb`. `Model` in `src/scenes/BrainScene.jsx` loads it through Drei useGLTF, clones materials per scene, and centers/scales its bounds automatically. Adjust the surrounding group rotation if a replacement has different orientation. Preserve its required license and attribution. For the original supplied archive, `node scripts/prepare-brain.mjs` converts legacy materials after extracting the GLB.

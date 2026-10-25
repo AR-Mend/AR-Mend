@@ -6,4 +6,10 @@ for(const asset of ['src/styles.css','src/scenes/BrainScene.jsx','README.md','di
 for(const asset of [...readFileSync('dist/index.html','utf8').matchAll(/(?:src|href)="(\/assets\/[^\"]+)"/g)])assert(existsSync('dist'+asset[1]),`Broken asset ${asset[1]}`);
 assert(app.includes('No messages are sent or stored.'));
 assert(app.includes('aria-invalid'));
+assert(existsSync('dist/branding/ar-mend-logo.jpg'),'Missing deployed logo');
+assert.equal((app.match(/<Brand\/>/g)||[]).length,2,'Header and footer must share the logo');
+const css=readFileSync('src/styles.css','utf8');
+assert(css.includes('--accent:#c77dff'),'Logo lavender accent missing');
+assert(!/00e5ff|397bff/i.test(css),'Old cyan theme remains');
 console.log('PASS: six navigation targets, production assets, demo disclosure, and form error semantics.');
+console.log('PASS: shared header/footer logo, deployed image, and purple theme.');
