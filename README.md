@@ -27,7 +27,36 @@ Lenis is the single smooth-scroll controller and updates GSAP ScrollTrigger thro
 The 3D scene is lazy loaded, limits pixel ratio to 1.5, uses restrained bloom, and stops continuous frames when offscreen. WebGL failures use a static icon fallback. GLB geometry and textures are cached across scenes; scene-specific material clones are disposed on unmount. For lower-powered devices, disable postprocessing or reduce texture resolution. Browser and device-specific WebGL support still varies.
 
 ## Project map
-`src/main.jsx` contains reusable presentation sections and form/navigation behavior. `src/scenes/BrainScene.jsx` owns 3D rendering. `src/styles.css` owns visual tokens and responsive styles. `DESIGN.md` records design intent.
+The source is split by responsibility:
+
+```text
+src/
+  main.jsx                  Application entry point
+  App.jsx                   Page composition
+  components/               One file per page section
+    shared/                 Brand, buttons, brain loading and fallback
+  hooks/                    Reduced motion, smooth scrolling, reveals
+  data/navigation.js        Shared navigation labels
+  lib/animation.js          GSAP and ScrollTrigger setup
+  scenes/BrainScene.jsx     Textured 3D brain rendering
+  styles/
+    index.css               Stylesheet entry and import order
+    base.css                Theme tokens and common styles
+    navigation.css          Header and navigation
+    hero.css                Hero and technology strip
+    about.css               Vision section
+    features.css            Feature cards
+    storytelling.css        Pinned story section
+    workflow.css            Workflow steps
+    applications.css        Application panels
+    contact.css             Contact form and FAQ
+    footer.css              Footer
+    utilities.css           Fallback and skip link
+    responsive.css          Canvas sizing, breakpoints, logo sizing
+    content.css             Additional explanatory sections
+```
+
+`DESIGN.md` records design intent. Run `node scripts/check.mjs` after a build to check local imports, section targets, assets, and theme preservation. The file split preserves the existing component logic and CSS rule order.
 
 ## Scope
 No clinical validation is claimed. This project is not a medical device, does not provide diagnosis or medical advice, and does not replace professional evaluation. The separate referenced project-plan attachment was not provided; implementation follows the full pasted specification.
