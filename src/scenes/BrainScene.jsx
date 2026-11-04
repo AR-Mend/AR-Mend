@@ -43,7 +43,7 @@ function CameraFit({mode}){
   const aspect=size.width/Math.max(1,size.height);
   const halfFov=THREE.MathUtils.degToRad(camera.fov/2);
   const limitingFov=Math.min(halfFov,Math.atan(Math.tan(halfFov)*aspect));
-  camera.position.set(0,0,(mode===6?3.1:mode===5?3:2.65)/Math.sin(limitingFov));
+  camera.position.set(0,0,(mode===6?3.8:3.5)/Math.sin(limitingFov));
   camera.lookAt(0,0,0);camera.updateProjectionMatrix();invalidate();
  },[camera,size.width,size.height,mode,invalidate]);
  return null;
@@ -52,8 +52,8 @@ function World({mode,reduced,rotation}){
  const group=useRef();
  useFrame((_,delta)=>{
   if(!group.current)return;
-  group.current.rotation.x=reduced?rotation.current.x:THREE.MathUtils.damp(group.current.rotation.x,rotation.current.x,14,delta);
-  group.current.rotation.y=reduced?rotation.current.y:THREE.MathUtils.damp(group.current.rotation.y,rotation.current.y,14,delta);
+  group.current.rotation.x=reduced?rotation.current.x:THREE.MathUtils.damp(group.current.rotation.x,rotation.current.x,22,delta);
+  group.current.rotation.y=reduced?rotation.current.y:THREE.MathUtils.damp(group.current.rotation.y,rotation.current.y,22,delta);
  });
  return <><CameraFit mode={mode}/><ambientLight intensity={.85}/><directionalLight position={[-4,5,5]} intensity={2.4} color="#efe0ff"/><pointLight position={[4,1,-2]} intensity={25} color="#ad45f5"/>
  <group ref={group} rotation={[.12,-.35,0]}>
@@ -73,7 +73,7 @@ export default function BrainScene({mode=0,reduced=false}){
  <div className="brain-viewport" role="group" aria-label="Interactive brain. Drag to rotate, or use arrow keys. Press Home to reset." tabIndex={0}
  onKeyDown={e=>{const keys={ArrowLeft:[0,-.35],ArrowRight:[0,.35],ArrowUp:[-.25,0],ArrowDown:[.25,0]};if(keys[e.key]){e.preventDefault();turn(...keys[e.key])}if(e.key==='Home'){e.preventDefault();rotation.current={x:.12,y:-.35};invalidate.current()}}}
  onPointerDown={e=>{if(e.button!==0)return;drag.current={x:e.clientX,y:e.clientY};e.currentTarget.setPointerCapture(e.pointerId)}}
- onPointerMove={e=>{if(!drag.current)return;turn((e.clientY-drag.current.y)*.012,(e.clientX-drag.current.x)*.018);drag.current={x:e.clientX,y:e.clientY}}}
+ onPointerMove={e=>{if(!drag.current)return;turn((e.clientY-drag.current.y)*.024,(e.clientX-drag.current.x)*.036);drag.current={x:e.clientX,y:e.clientY}}}
  onPointerUp={()=>{drag.current=null}} onPointerCancel={()=>{drag.current=null}} onLostPointerCapture={()=>{drag.current=null}}>
  <Canvas dpr={[1,1.5]} camera={{position:[0,0,8],fov:43}} frameloop={visible&&!reduced?'always':'demand'} onCreated={state=>{invalidate.current=state.invalidate}} gl={{antialias:true,alpha:true,powerPreference:'low-power'}} fallback={<div className="fallback">3D visualization unavailable</div>}><World mode={mode} reduced={reduced} rotation={rotation}/></Canvas>
  </div><div className="brain-controls"><span>Drag to rotate · arrow keys</span><button type="button" onClick={()=>{rotation.current={x:.12,y:-.35};invalidate.current()}}>Reset view</button></div></div>
