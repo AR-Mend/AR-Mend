@@ -45,3 +45,11 @@ main{background:transparent}h1,h2{font-family:var(--body);font-weight:600;letter
 
 .feature-card .model-preview{aspect-ratio:1.5}.footer-note{font-size:11px;line-height:1.8;text-align:center;color:#baaac9;margin:20px auto 0;max-width:1000px}@media(max-width:767px){.footer-note{text-align:left;font-size:11px}}
 .hero-model .brain-viewport{right:0}.hero-model>.model-orbit{left:50%}.hero-model>.view-switcher{left:50%}
+
+/* Keep the entire orbital frame inside a viewport-sized hero. */
+.hero{width:100%;max-width:none}
+.hero-model{--hero-stage-height:365px;height:var(--hero-stage-height);margin-top:0}
+.hero-model>.model-orbit{width:min(calc(100% - 84px),calc(var(--hero-stage-height) - 84px));height:auto;aspect-ratio:1}
+@media(min-width:768px){.hero{min-height:calc(100svh - 82px);padding-top:18px;padding-bottom:56px}.hero-model{--hero-stage-height:clamp(320px,calc(100svh - 170px),650px)}.hero-end{bottom:18px}}
+@media(min-width:768px) and (max-height:600px){.hero{padding-top:10px;padding-bottom:44px}.hero-model{--hero-stage-height:clamp(280px,calc(100svh - 150px),450px)}.hero h1{font-size:clamp(30px,3vw,46px)}.hero-description{margin-top:17px}.hero-description p{font-size:14px;margin-bottom:18px}}
+
