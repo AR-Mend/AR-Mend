@@ -15,3 +15,6 @@ After the vision, explain spatial visualization with an editorial two-column sec
 The hero and storytelling use the user's human-brain.zip GLB, with embedded textures and core glTF material conversion. Other diagrams are generated locally. The supplied original is preserved as public/branding/ar-mend-logo.jpg. The transparent-background public/branding/ar-mend-logo-transparent.png is displayed through a tightly framed SVG viewBox in the shared header/footer Brand component and used as the favicon. No network-loaded fonts. No author or license was included in the supplied model archive; provenance is recorded in public/models/ASSET-NOTES.md. The model is a visualization and not an anatomical reference.
 
 
+
+## Brain interaction refinements
+The shared scene supports responsive drag rotation (0.018 radians per horizontal pixel), arrow keys, and Reset view. Touch retains vertical page scrolling. Camera fitting reserves the complete rotating model at every aspect ratio. Spatial annotations have neutral surface-landmark labels (illustrative, not anatomical claims); the immersive stage shows a coordinate workspace; the final stage compares textured and wireframe models side by side. All stages retain the complete source geometry.

@@ -1,15 +1,12 @@
 import React,{useMemo,useRef,useEffect,useState} from 'react';
 import {Canvas,useFrame,useThree} from '@react-three/fiber';
-import {Float,Sparkles,Line,useGLTF} from '@react-three/drei';
-import {EffectComposer,Bloom} from '@react-three/postprocessing';
+import {Sparkles,Line,Html,useGLTF} from '@react-three/drei';
 import * as THREE from 'three';
 
 const ACCENT=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
-const VIOLET=getComputedStyle(document.documentElement).getPropertyValue('--violet').trim();
 const MODEL_URL='/models/human-brain.glb';
-function Model({mode,reduced}){
- const {scene}=useGLTF(MODEL_URL);const group=useRef();const invalidate=useThree(s=>s.invalidate);
- // Each canvas owns its materials. Cached geometry and textures remain shared.
+function Model({mode,position=[0,0,0],scale=1.52}){
+ const {scene}=useGLTF(MODEL_URL);
  const {model,materials}=useMemo(()=>{
   const model=scene.clone(true),materials=[];
   model.updateMatrixWorld(true);
@@ -20,12 +17,13 @@ function Model({mode,reduced}){
    const clone=source=>{const material=source.clone();materials.push(material);return material};
    mesh.material=Array.isArray(mesh.material)?mesh.material.map(clone):clone(mesh.material);
    const pointMaterial=new THREE.PointsMaterial({color:'#d7a6ff',size:.016,transparent:true,opacity:.85,depthWrite:false});materials.push(pointMaterial);
-   const points=new THREE.Points(mesh.geometry,pointMaterial);points.name='neural-points';points.visible=false;mesh.add(points);
+   const points=new THREE.Points(mesh.geometry,pointMaterial);points.visible=false;mesh.add(points);
   });
   const normalized=new THREE.Group();normalized.scale.setScalar(scale);normalized.position.copy(center).multiplyScalar(-scale);normalized.add(model);
   return{model:normalized,materials};
  },[scene]);
  useEffect(()=>()=>materials.forEach(material=>material.dispose()),[materials]);
+ const invalidate=useThree(s=>s.invalidate);
  useEffect(()=>{
   model.traverse(node=>{
    if(node.isMesh)for(const material of Array.isArray(node.material)?node.material:[node.material]){
@@ -36,8 +34,47 @@ function Model({mode,reduced}){
    if(node.isPoints)node.visible=mode===4;
   });invalidate();
  },[model,mode,invalidate]);
- useFrame(({clock,pointer},delta)=>{if(!group.current||reduced)return;group.current.rotation.y=THREE.MathUtils.damp(group.current.rotation.y,-.35+Math.sin(clock.elapsedTime*.16)*.23+pointer.x*.12,3,delta);group.current.rotation.x=THREE.MathUtils.damp(group.current.rotation.x,.12+pointer.y*.06,3,delta)});
- return <group ref={group} rotation={[.12,-.35,-.12]} scale={1.52} dispose={null}><primitive object={model}/>{(mode===2||mode===5)&&[-1,1].map(s=><group key={s}><Line points={[[s*.6,.6,0],[s*1.5,1.1,0],[s*1.9,1.1,0]]} color={ACCENT} lineWidth={1}/><mesh position={[s*.6,.6,0]}><sphereGeometry args={[.045,12,12]}/><meshBasicMaterial color="#edd2ff"/></mesh></group>)}{mode===4&&<Sparkles count={100} scale={[2.2,2.1,1.6]} size={2} color="#c98aff" speed={reduced?0:.2}/>}</group>;
+ return <group position={position} scale={scale} dispose={null}><primitive object={model}/></group>;
 }
-function World({mode,reduced}){return <><ambientLight intensity={.65}/><directionalLight position={[-4,5,5]} intensity={2.4} color="#efe0ff"/><pointLight position={[4,1,-2]} intensity={32} color="#ad45f5"/><pointLight position={[-3,-2,2]} intensity={8} color={VIOLET}/><Float speed={reduced?0:.8} rotationIntensity={0} floatIntensity={reduced?0:.25}><Model mode={mode} reduced={reduced}/></Float>{!reduced&&<Sparkles count={45} scale={[7,6,4]} size={1.4} color="#d5acff" opacity={.5} speed={.15}/>}<mesh rotation={[Math.PI/2,.15,0]} position={[0,-2,0]}><torusGeometry args={[2.15,.006,6,110]}/><meshBasicMaterial color="#642a8e" transparent opacity={.45}/></mesh>{mode===5&&<gridHelper args={[12,20,'#63298c','#2d143f']} position={[0,-2.1,0]}/>}<EffectComposer multisampling={0}><Bloom luminanceThreshold={1.5} intensity={.25} mipmapBlur/></EffectComposer></>}
-export default function BrainScene({mode=0,reduced=false}){const[visible,setVisible]=useState(true);const wrap=useRef();useEffect(()=>{const ob=new IntersectionObserver(([e])=>setVisible(e.isIntersecting),{rootMargin:'80px'});ob.observe(wrap.current);return()=>ob.disconnect()},[]);return <div ref={wrap} className="canvas-wrap" role="img" aria-label="Interactive textured human brain model"><Canvas dpr={[1,1.5]} camera={{position:[0,0,6.8],fov:43}} frameloop={visible&&!reduced?'always':'demand'} gl={{antialias:true,alpha:true,powerPreference:'low-power'}} fallback={<div className="fallback">3D visualization unavailable</div>}><World mode={mode} reduced={reduced}/></Canvas></div>}
+function CameraFit({mode}){
+ const {camera,size,invalidate}=useThree();
+ useEffect(()=>{
+  // Fit a sphere around the complete rotating model, including its brainstem.
+  const aspect=size.width/Math.max(1,size.height);
+  const halfFov=THREE.MathUtils.degToRad(camera.fov/2);
+  const limitingFov=Math.min(halfFov,Math.atan(Math.tan(halfFov)*aspect));
+  camera.position.set(0,0,(mode===6?3.1:mode===5?3:2.65)/Math.sin(limitingFov));
+  camera.lookAt(0,0,0);camera.updateProjectionMatrix();invalidate();
+ },[camera,size.width,size.height,mode,invalidate]);
+ return null;
+}
+function World({mode,reduced,rotation}){
+ const group=useRef();
+ useFrame((_,delta)=>{
+  if(!group.current)return;
+  group.current.rotation.x=reduced?rotation.current.x:THREE.MathUtils.damp(group.current.rotation.x,rotation.current.x,14,delta);
+  group.current.rotation.y=reduced?rotation.current.y:THREE.MathUtils.damp(group.current.rotation.y,rotation.current.y,14,delta);
+ });
+ return <><CameraFit mode={mode}/><ambientLight intensity={.85}/><directionalLight position={[-4,5,5]} intensity={2.4} color="#efe0ff"/><pointLight position={[4,1,-2]} intensity={25} color="#ad45f5"/>
+ <group ref={group} rotation={[.12,-.35,0]}>
+ {mode===6?<><Model mode={0} position={[-1.45,0,0]} scale={.9}/><Model mode={3} position={[1.45,0,0]} scale={.9}/></>:<Model mode={mode} scale={mode===5?1.15:1.52}/>}
+ {mode===2&&[-1,1].map(s=><group key={s}><Line points={[[s*.9,.65,.5],[s*1.65,1.35,.5],[s*2.05,1.35,.5]]} color={ACCENT} lineWidth={1.3}/><mesh position={[s*.9,.65,.5]}><sphereGeometry args={[.045,12,12]}/><meshBasicMaterial color="#edd2ff"/></mesh><Html position={[s*1.8,1.58,.5]} center style={{pointerEvents:'none'}}><span className="brain-label">{s===-1?'Surface landmark A':'Surface landmark B'}</span></Html></group>)}
+ </group>
+ {mode===5&&<><gridHelper args={[5,12,'#b968ef','#4c285d']} position={[0,-1.8,0]}/><Line points={[[-2.5,-1.8,-1.4],[-2.5,1.8,-1.4],[2.5,1.8,-1.4],[2.5,-1.8,-1.4]]} color={ACCENT}/><Line points={[[-2.5,1.8,-1.4],[-2.5,1.8,1.4]]} color="#70458c"/><Line points={[[2.5,1.8,-1.4],[2.5,1.8,1.4]]} color="#70458c"/><Html position={[0,2.15,0]} center><span className="brain-label">CONCEPTUAL SPATIAL WORKSPACE</span></Html></>}
+ {mode===6&&[-1,1].map(s=><Html key={s} position={[s*1.45,-1.5,0]} center><span className="brain-label">{s===-1?'TEXTURED ANATOMY':'SURFACE GEOMETRY'}</span></Html>)}
+ {!reduced&&<Sparkles count={30} scale={[6,5,3]} size={1.2} color="#d5acff" opacity={.4} speed={.12}/>}
+ </>;
+}
+export default function BrainScene({mode=0,reduced=false}){
+ const[visible,setVisible]=useState(true);const wrap=useRef(),rotation=useRef({x:.12,y:-.35}),drag=useRef(null),invalidate=useRef(()=>{});
+ useEffect(()=>{const ob=new IntersectionObserver(([e])=>setVisible(e.isIntersecting),{rootMargin:'80px'});ob.observe(wrap.current);return()=>ob.disconnect()},[]);
+ const turn=(x,y)=>{rotation.current.x=THREE.MathUtils.clamp(rotation.current.x+x,-Math.PI/2,Math.PI/2);rotation.current.y+=y;invalidate.current()};
+ return <div ref={wrap} className="canvas-wrap brain-interactive">
+ <div className="brain-viewport" role="group" aria-label="Interactive brain. Drag to rotate, or use arrow keys. Press Home to reset." tabIndex={0}
+ onKeyDown={e=>{const keys={ArrowLeft:[0,-.35],ArrowRight:[0,.35],ArrowUp:[-.25,0],ArrowDown:[.25,0]};if(keys[e.key]){e.preventDefault();turn(...keys[e.key])}if(e.key==='Home'){e.preventDefault();rotation.current={x:.12,y:-.35};invalidate.current()}}}
+ onPointerDown={e=>{if(e.button!==0)return;drag.current={x:e.clientX,y:e.clientY};e.currentTarget.setPointerCapture(e.pointerId)}}
+ onPointerMove={e=>{if(!drag.current)return;turn((e.clientY-drag.current.y)*.012,(e.clientX-drag.current.x)*.018);drag.current={x:e.clientX,y:e.clientY}}}
+ onPointerUp={()=>{drag.current=null}} onPointerCancel={()=>{drag.current=null}} onLostPointerCapture={()=>{drag.current=null}}>
+ <Canvas dpr={[1,1.5]} camera={{position:[0,0,8],fov:43}} frameloop={visible&&!reduced?'always':'demand'} onCreated={state=>{invalidate.current=state.invalidate}} gl={{antialias:true,alpha:true,powerPreference:'low-power'}} fallback={<div className="fallback">3D visualization unavailable</div>}><World mode={mode} reduced={reduced} rotation={rotation}/></Canvas>
+ </div><div className="brain-controls"><span>Drag to rotate · arrow keys</span><button type="button" onClick={()=>{rotation.current={x:.12,y:-.35};invalidate.current()}}>Reset view</button></div></div>
+}
