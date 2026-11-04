@@ -1,7 +1,1 @@
-import {Brain} from 'lucide-react';
-
-function Fallback() {
-  return <div className="fallback" role="img" aria-label="Stylized folded brain illustration"><Brain size={220} strokeWidth={.65} /><span>NEURAL VISUALIZATION</span></div>;
-}
-
-export default Fallback;
+export default function Fallback({failed=false}){return <div className="viewer-fallback" role="status"><span className="loading-orbit" aria-hidden="true"/><p>{failed?'The 3D viewer could not load. Refresh to try again.':'Loading the brain model…'}</p></div>}

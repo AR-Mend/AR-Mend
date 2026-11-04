@@ -13,7 +13,7 @@ class SceneBoundary extends React.Component {
     };
   }
   render() {
-    return this.state.failed ? <Fallback /> : this.props.children;
+    return this.state.failed ? <Fallback failed /> : this.props.children;
   }
 }
 

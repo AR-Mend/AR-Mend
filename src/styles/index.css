@@ -1,17 +1,1 @@
-@import "tailwindcss";
-@import './base.css';
-@import './navigation.css';
-@import './hero.css';
-@import './about.css';
-@import './features.css';
-@import './storytelling.css';
-@import './workflow.css';
-@import './applications.css';
-@import './faq.css';
-
-@import './utilities.css';
-@import './responsive.css';
-@import './content.css';
-
-@import './footer.css';
-@import './brand-panels.css';
+@import './design.css';

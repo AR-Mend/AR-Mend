@@ -1,29 +1,20 @@
-# AR MEND design direction
+# AR MEND — model-led marketing site
+English presentation of the owner's working AR MEND model, by BLOCK-UP. Tagline: Where AI meets healthcare. No invented clinical accuracy, diagnosis or product-integration claims.
 
-An English presentation site for researchers, educators, and curious visitors. Its purpose is to explain a conceptual neurotechnology project.
+## Approved direction
+The supplied November 4 brief replaces the boxed purple/circuit design. Near-black #08060D, warm brain pink #E9A7A5, readable body #CFC9DC; purple reserved for controls and focus. A light #F0EEE8 Uses section changes the pace. All runtime tokens are owned by src/styles/design.css. Locally hosted Instrument Serif headlines and Inter body, 16–18px. System fallbacks keep text readable while fonts load. SIL Open Font Licenses are included in public/fonts.
 
-## Visual system
-The supplied AR MEND brain-and-glasses logo defines the palette. Runtime tokens live in src/styles/base.css: ink #050307, secondary surface #100A19, accent lavender #C77DFF, violet #8E24D6, white #FAF7FF, muted text #B4A6C4. The 3D scene reads the primary accent and violet tokens from CSS; other lighting colors are calibrated lavender variations. Display typography uses Arial with tight tracking; utility labels use monospace. Large asymmetric hero, fine instrument rules, generous section spacing. The signature is a textured brain suspended inside a restrained purple spatial coordinate frame. Maintain readable light accents against black rather than using the logo's dark purple for body text.
+## Structure
+Sticky borderless header; large unframed model hero; one four-step How it works explanation with a sticky viewer; plain Uses rows; full-width visible disclaimer; five existing FAQ answers; a simple Contact demo; slim branded footer. Navigation derives the active section from its viewport position. No decorative circuits, feature cards, repeated view explanations, gray split headlines or tiny boxed labels.
 
-## Behavior
-Real anchor navigation, active section indicator, mobile disclosure menu, keyboard-accessible viewing modes, native FAQ disclosures. There is no contact page or form. The reference-led footer uses a large transparent logo, four link columns, purple circuit paths, a faint brain outline, and a BLOCK-UP credit. Footer links point to existing sections and the supplied partner website. No invented clinical claims or statistics. Reduced motion disables smooth scrolling, continuous scene motion, and pinned storytelling. Mobile retains the brain and uses natural document flow.
+## Viewer
+Preserve public/models/human-brain.glb and the shared React Three Fiber scene. Both hero and guided viewer reuse the same model loader and scene. Modes: textured 0, wireframe 3, points 4, context 2. Scroll selects the closest step; explicit step buttons and appearance buttons remain available. Desktop viewer sticks beside the steps; mobile sticks above them. Controls include sensitive drag rotation, arrow keys, +/- zoom (75–200%), pause and reset. Auto rotation is slow and starts disabled for reduced motion. Lazy loading and recoverable error text reserve viewer space.
 
-## Content progression
-After the vision, explain spatial visualization with an editorial two-column section and an illustrative layered diagram. After the feature overview, provide a selectable AI/AR/VR guide covering each concept, a hypothetical scenario, and the current demo's limits. After applications, distinguish working frontend capabilities from possible future research steps. Use the existing palette and type scale in src/styles/content.css. Avoid implying model inference, scan upload, room tracking, headset support, or clinical validation. FAQ includes practical model controls, scan-upload scope, and future-prototype questions.
+## Contact
+Frontend-only form, no delivery service configured. Disclosure appears before submitting. Validation focuses the first invalid field; success says the message is ready to review and was not sent. Nothing is stored or transmitted. Real delivery requires a configured service.
 
-## Assets
-The hero and storytelling use the user's human-brain.zip GLB, with embedded textures and core glTF material conversion. Other diagrams are generated locally. The supplied original is preserved as public/branding/ar-mend-logo.jpg. The transparent-background public/branding/ar-mend-logo-transparent.png is displayed through a tightly framed SVG viewBox in the shared header/footer Brand component and used as the favicon. No network-loaded fonts. No author or license was included in the supplied model archive; provenance is recorded in public/models/ASSET-NOTES.md. The model is a visualization and not an anatomical reference.
+## Assets and external links
+Preserve the supplied transparent logo, tightly framed favicon and GLB. Model provenance remains in public/models/ASSET-NOTES.md. Footer uses the website in the approved brief, www.block-up.tech. Exact LinkedIn profile URL was not supplied; the labeled link opens a company search for Block Ultimate-Protection.
 
-
-
-## Brain interaction refinements
-The shared scene supports responsive drag rotation (0.036 radians per horizontal pixel, 0.024 vertically), arrow keys, and Reset view. Touch retains vertical page scrolling. Camera fitting reserves a conservative bounding sphere (3.5 units; 3.8 for the paired view) around the complete rotating model at every aspect ratio, including the brainstem. Spatial annotations have neutral surface-landmark labels (illustrative, not anatomical claims); the immersive stage shows a coordinate workspace; the final stage compares textured and wireframe models side by side. All stages retain the complete source geometry.
-
-Footer density: compact vertical padding, a 135px desktop / 120px mobile logo, and tighter link spacing preserve the reference design without a tall closing section.
-
-Brain motion and zoom: slow automatic rotation (0.12 radians/second) pauses during dragging and has a visible pause toggle. Reduced-motion preferences start rotation paused. Zoom buttons and +/- keys support 75–200%; Reset view restores 100% and the initial angle.
-
-Hero viewer: no drag/zoom/pause/reset toolbar; the brain rotates slowly automatically and retains manual rotation. The storytelling viewer keeps its full controls.
-Footer-led framing: black boxed surfaces, violet borders, lavender square accents and subtle circuit corners now connect every section. Panel tokens live in brand-panels.css. The rotating brain, content and compact footer remain.
-Navigation uses a borderless translucent dark background with backdrop blur. Links indicate hover and active state through lavender text; keyboard focus remains visible.
-Navigation active state includes a small lavender dot; hover and keyboard focus animate a fine underline. Reduced motion disables the transition.
+## Verification
+Build and scripts/check.mjs; test view changes, zoom bounds/reset/pause, scroll-selected steps, active nav, mobile menu, FAQ, invalid and valid form states, mobile overflow and model loading. Keep medical copy prominent and do not imply that points show AI findings.
