@@ -1,1 +1,7 @@
-export default function Fallback({loading=false}){return <div className="fallback" role="status"><span className="eyebrow">AR MEND / MODEL STUDY</span><p>{loading?'Preparing the 3D view…':'3D view unavailable'}</p><span>{loading?'The study will appear here.':'You can still explore the project below.'}</span></div>;}
+import {Brain} from 'lucide-react';
+
+function Fallback() {
+  return <div className="fallback" role="img" aria-label="Stylized folded brain illustration"><Brain size={220} strokeWidth={.65} /><span>NEURAL VISUALIZATION</span></div>;
+}
+
+export default Fallback;

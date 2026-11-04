@@ -1,8 +1,10 @@
 import {useState} from 'react';
-import {Plus,ArrowUpRight} from 'lucide-react';
-const items=[{label:'Medical education',title:'Learn anatomy in context.',body:'A model can become the focus of a lesson: change the view, introduce a label, and discuss what is visible. AR MEND explores that interaction as a learning concept.',question:'What changes when a lesson has a spatial point of reference?'},{label:'Neuroscience research',title:'Make the subject of a discussion visible.',body:'Spatial presentations could offer another way to explain brain-related research. This demonstration focuses on representation; it does not present experimental findings or analyze a dataset.',question:'How could a spatial model make a research discussion clearer?'},{label:'Surgical-planning concepts',title:'Consider relationships before a procedure.',body:'The project considers immersive views as a direction for future planning research. It does not contain patient-specific models, simulate procedures, or support real surgical decisions.',question:'What would a responsible planning prototype need to show?'}];
-export default function Applications(){const[selected,setSelected]=useState(0);const current=items[selected];return <section id="applications" className="section applications">
- <div className="section-marker"><p className="eyebrow">CONTEXTS FOR EXPLORATION</p><span>EDUCATION / RESEARCH / PLANNING</span></div>
- <div className="application-layout"><div><h2>A model is only useful<br/><em>in a context.</em></h2><div className="application-list">{items.map((item,i)=><div key={item.label}><button aria-expanded={selected===i} aria-controls={'application-'+i} onClick={()=>setSelected(selected===i?-1:i)}>{item.label}<Plus size={19} className={selected===i?'rotated':''}/></button>{selected===i&&<div id={'application-'+i}><h3>{item.title}</h3><p>{item.body}</p></div>}</div>)}</div></div>
- <aside className="application-question"><span className="eyebrow">A QUESTION WORTH EXPLORING</span><p>{current?.question||'Which spatial questions would you explore?'}</p><a className="text-link" href="#contact">Discuss a use case <ArrowUpRight size={18}/></a></aside></div>
-</section>;}
+import {Plus,Brain} from 'lucide-react';
+
+function Applications() {
+  const [a, setA] = useState(0);
+  const items = [['Neurosurgical planning concepts', 'Explore spatial relationships and potential planning perspectives in a conceptual 3D environment.'], ['Medical education & training', 'Imagine a more tangible way for students to explore anatomy, structures, and spatial relationships.'], ['Neuroscience research', 'Present complex brain-related information through interactive visual exploration.']];
+  return <section className="section applications" id="applications"><div><p className="eyebrow">POSSIBLE APPLICATIONS</p><h2>New dimensions.<br /><span>Meaningful possibilities.</span></h2><div className="application-list">{items.map(([title, body], i) => <div key={title}><button aria-expanded={a === i} onClick={() => setA(a === i ? -1 : i)}>{title}<Plus className={a === i ? 'rotated' : ''} size={20} /></button>{a === i && <p>{body}</p>}</div>)}</div></div><div className="application-art"><div className="scan-frame"><Brain size={220} strokeWidth={.6} /><span className="scan-line" /></div><div className="art-label"><span className="status-dot" /> SPATIAL UNDERSTANDING<br /><b>EXPLORING THE NEXT PERSPECTIVE</b></div></div></section>;
+}
+
+export default Applications;

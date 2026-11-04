@@ -1,39 +1,17 @@
 # AR MEND design direction
 
-## Purpose and audience
-An English presentation website for students, educators, researchers, and visitors exploring spatial medical technology. Its job is to explain the concept and offer a tangible model study, without implying clinical capability.
+An English presentation site for researchers, educators, and curious visitors. Its purpose is to explain a conceptual neurotechnology project.
 
-## Creative direction
-An anatomical study, rather than a futuristic dashboard. The supplied textured brain is the signature visual, set on a flat lavender specimen panel. Large asymmetric type, a single italic serif emphasis, dark graphite, and cool paper sections provide structure. The logo remains unchanged and transparent. There are no atmospheric particles, halos, neon lighting, card tilts, gradients, or glass panels.
+## Visual system
+The supplied AR MEND brain-and-glasses logo defines the palette. Runtime tokens live in src/styles/base.css: ink #050307, secondary surface #100A19, accent lavender #C77DFF, violet #8E24D6, white #FAF7FF, muted text #B4A6C4. The 3D scene reads the primary accent and violet tokens from CSS; other lighting colors are calibrated lavender variations. Display typography uses Arial with tight tracking; utility labels use monospace. Large asymmetric hero, fine instrument rules, generous section spacing. The signature is a textured brain suspended inside a restrained purple spatial coordinate frame. Maintain readable light accents against black rather than using the logo's dark purple for body text.
 
-## Runtime token ownership
-Model B: src/styles/base.css is canonical; this document mirrors the accepted values. The split stylesheets consume its CSS variables. The 3D renderer reads the root violet token and uses separate neutral lighting values appropriate to the specimen view.
+## Behavior
+Real anchor navigation, active section indicator, mobile disclosure menu, keyboard-accessible viewing modes, native FAQ disclosures. Contact is a clearly labeled local demo; no message is transmitted. No invented clinical claims or statistics. Reduced motion disables smooth scrolling, continuous scene motion, and pinned storytelling. Mobile retains the brain and uses natural document flow.
 
-| Role | Runtime token | Value |
-| --- | --- | --- |
-| Dark surface and text | --ink | #121215 |
-| Paper section | --paper | #F2F0F5 |
-| Specimen panel | --surface | #E3DCE9 |
-| Brand lavender on dark | --accent | #C77DFF |
-| Accessible purple on light | --violet | #6838A2 |
-| Main dark-surface text | --white | #F8F7F9 |
-| Secondary dark-surface text | --gray | #B3B0B8 |
-| Dark rules | --line | #343337 |
+## Content progression
+After the vision, explain spatial visualization with an editorial two-column section and an illustrative layered diagram. After the feature overview, provide a selectable AI/AR/VR guide covering each concept, a hypothetical scenario, and the current demo's limits. After applications, distinguish working frontend capabilities from possible future research steps. Use the existing palette and type scale in src/styles/content.css. Avoid implying model inference, scan upload, room tracking, headset support, or clinical validation. FAQ includes practical model controls, scan-upload scope, and future-prototype questions.
 
-Light sections override semantic --text, --muted, --border, --accent, and --focus. Their body text is #121215 or #65616D. Avoid independent colors for controls that already have semantic tokens.
+## Assets
+The hero and storytelling use the user's human-brain.zip GLB, with embedded textures and core glTF material conversion. Other diagrams are generated locally. The supplied original is preserved as public/branding/ar-mend-logo.jpg. The transparent-background public/branding/ar-mend-logo-transparent.png is displayed through a tightly framed SVG viewBox in the shared header/footer Brand component and used as the favicon. No network-loaded fonts. No author or license was included in the supplied model archive; provenance is recorded in public/models/ASSET-NOTES.md. The model is a visualization and not an anatomical reference.
 
-## Typography and spacing
-Arial/Helvetica is the working sans serif. Georgia italic is reserved for one meaningful phrase in a display heading and the application research question. Body copy is 14–16px where possible; annotations are subordinate and never the only description of an action. Desktop section spacing is 100px, tablet 80px, mobile 65px. Horizontal gutters scale from 24px to 100px. Buttons are rectangular and at least 44px high where they are primary actions. Small scene controls remain individually accessible with visible focus.
-
-## Page sequence
-Hero and specimen controls; project summary; approach with surface/structure/abstraction definitions; seven-view model study; integrated AI/AR/VR guide; proposed process; application accordion; scope; practical questions; contact; typographic footer. Existing section files remain owners of their content. PerspectiveSection is composed within AboutSection; TechnologyGuide is composed within FeaturesSection. This avoids repeating full sections without discarding their important information.
-
-## Interaction and motion
-Native anchor navigation and active section ownership. A solid mobile disclosure menu supports Escape and focus return. The hero retains Anatomy, Wireframe, and Neural views and adds explicit keyboard-operable rotation arrows. Pointer parallax is slight; automatic spinning and floating are removed. The seven-view study uses a shorter scrubbed sequence only at widths of at least 1100px and heights of at least 780px. Other viewports use natural document flow with all seven manual controls. Reduced motion disables smoothing, pinning, pointer parallax and eased rotation, and CSS transitions. Brief, once-only reveals are limited to section labels. The canvas uses demand rendering: view changes and pointer/rotation updates request frames, then rendering stops when the view settles. No page-transition effects on this single-page site.
-
-## Assets and scope
-The supplied GLB and its embedded textures remain in public/models/human-brain.glb. The logo uses public/branding/ar-mend-logo-transparent.png in the shared Brand and favicon. Original source artwork and model provenance remain available. No stock photography or generated anatomical illustration is added. No external fonts are loaded. No medical data is uploaded, no AI inference runs, and no dedicated AR/VR system is integrated. Contact remains a local validation demo with no transmission or storage. No clinical validation is claimed.
-
-## Verification
-Review each section at desktop, tablet, and narrow mobile widths. Check 3D modes and rotation, seven study controls, technology selection, accordion and FAQ, form errors and success, all navigation targets, menu Escape/focus return, overflow, focus visibility, and reduced-motion CSS. Run the production build, project checks, and a source identifier/import scan. Document infrastructure limits instead of inferring untested behavior.
 

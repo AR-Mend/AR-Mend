@@ -1,6 +1,7 @@
-import PerspectiveSection from './PerspectiveSection.jsx';
-export default function About(){return <section id="about" className="section about light-section">
-  <div className="section-marker"><span className="eyebrow">THE APPROACH</span><span>A RESEARCH CONCEPT</span></div>
-  <div className="about-intro"><h2>Complex anatomy.<br/><em>A more considered<br/>way to explore it.</em></h2><div className="about-copy"><p className="lead">AR MEND brings a spatial perspective to brain-related medical technology concepts.</p><p>It connects three questions: how might AI help examine medical information, how could anatomy be presented in space, and where might immersive views support learning or planning?</p><p>This website is the starting point: an interactive model and a clear explanation of the ideas behind it.</p></div></div>
-  <PerspectiveSection/>
-</section>;}
+import {ArrowUpRight,Brain,Layers3,MoveUpRight} from 'lucide-react';
+
+function About() {
+  return <section id="about" className="section about"><div><p className="eyebrow">OUR VISION</p><h2>Bridging medical<br />intelligence and<br /><span>immersive technology.</span></h2></div><div className="about-copy"><p className="lead">A different way to see.<br />A new way to understand.</p><p>AR MEND explores the intersection of artificial intelligence, human anatomy, and spatial computing. We’re imagining how complex medical information could become more intuitive, tangible, and accessible.</p><p>From brain analysis concepts to immersive surgical-planning exploration, our vision starts with a better perspective.</p><a className="text-link" href="#workflow">Follow the concept <ArrowUpRight size={17} /></a></div><div className="vision-strip">{[[Brain, 'Intelligent analysis', 'Exploring patterns in medical data.'], [Layers3, 'Immersive visualization', 'Turning complexity into spatial understanding.'], [MoveUpRight, 'Future-ready thinking', 'Connecting research with new possibilities.']].map(([Icon, title, body]) => <div key={title}><Icon /><h3>{title}</h3><p>{body}</p></div>)}</div></section>;
+}
+
+export default About;
