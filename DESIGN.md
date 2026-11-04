@@ -25,3 +25,4 @@ Brain motion and zoom: slow automatic rotation (0.12 radians/second) pauses duri
 
 Hero viewer: no drag/zoom/pause/reset toolbar; the brain rotates slowly automatically and retains manual rotation. The storytelling viewer keeps its full controls.
 Footer-led framing: black boxed surfaces, violet borders, lavender square accents and subtle circuit corners now connect every section. Panel tokens live in brand-panels.css. The rotating brain, content and compact footer remain.
+Navigation uses a borderless translucent dark background with backdrop blur. Links indicate hover and active state through lavender text; keyboard focus remains visible.
