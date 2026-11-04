@@ -22,9 +22,9 @@ The hero and storytelling now use the textured GLB supplied in human-brain.zip, 
 To replace the model again, place a self-contained, core glTF-compatible GLB at `public/models/human-brain.glb`. `Model` in `src/scenes/BrainScene.jsx` loads it through Drei useGLTF, clones materials per scene, and centers/scales its bounds automatically. Adjust the surrounding group rotation if a replacement has different orientation. Preserve its required license and attribution. For the original supplied archive, `node scripts/prepare-brain.mjs` converts legacy materials after extracting the GLB.
 
 ## Motion and accessibility
-Lenis is the single smooth-scroll controller and updates GSAP ScrollTrigger through its ticker; cleanup removes the ticker and scroll controller. Desktop storytelling pins and scrubs seven stages. Touch/narrow layouts use natural flow and explicit stage buttons. Reduced motion disables pinning, smoothing, continuous scene updates, and CSS transitions. Native links, labels, FAQ details, visible focus, validation errors, live status, and a skip link support keyboard and assistive technology users.
+Lenis is the single smooth-scroll controller and updates GSAP ScrollTrigger through its ticker; cleanup removes the ticker and scroll controller. The model study pins and scrubs seven stages only on sufficiently wide and tall desktop viewports, with a shorter scroll distance. Touch/narrow layouts use natural flow and explicit stage buttons. Reduced motion disables pinning, smoothing, continuous scene updates, and CSS transitions. Native links, labels, FAQ details, visible focus, validation errors, live status, and a skip link support keyboard and assistive technology users.
 
-The 3D scene is lazy loaded, limits pixel ratio to 1.5, uses restrained bloom, and stops continuous frames when offscreen. WebGL failures use a static icon fallback. GLB geometry and textures are cached across scenes; scene-specific material clones are disposed on unmount. For lower-powered devices, disable postprocessing or reduce texture resolution. Browser and device-specific WebGL support still varies.
+The 3D scene is lazy loaded, limits pixel ratio to 1.5, uses neutral lighting without postprocessing or particles, and uses demand rendering so idle and offscreen scenes do not render continuously. WebGL failures use a static icon fallback. GLB geometry and textures are cached across scenes; scene-specific material clones are disposed on unmount. For lower-powered devices, reduce texture resolution. Browser and device-specific WebGL support still varies.
 
 ## Project map
 The source is split by responsibility:
@@ -56,9 +56,10 @@ src/
     content.css             Additional explanatory sections
 ```
 
-`DESIGN.md` records design intent. Run `node scripts/check.mjs` after a build to check local imports, section targets, assets, and theme preservation. The file split preserves the existing component logic and CSS rule order.
+`DESIGN.md` records design intent. Run `node scripts/check.mjs` after a build to check local imports, section targets, assets, and theme preservation. The redesign retains the split source architecture. About composes PerspectiveSection, and Features composes TechnologyGuide, to avoid duplicate explanations.
 
 ## Scope
 No clinical validation is claimed. This project is not a medical device, does not provide diagnosis or medical advice, and does not replace professional evaluation. The separate referenced project-plan attachment was not provided; implementation follows the full pasted specification.
+
 
 

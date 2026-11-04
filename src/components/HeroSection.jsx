@@ -1,22 +1,25 @@
 import {useState} from 'react';
-import {motion} from 'framer-motion';
-import {ArrowRight,ArrowDown} from 'lucide-react';
+import {ArrowDown,ArrowLeft,ArrowRight} from 'lucide-react';
 import LinkButton from './shared/LinkButton.jsx';
 import Scene from './shared/BrainVisualization.jsx';
 
-function Hero({
-  reduced
-}) {
-  const [mode, setMode] = useState(0);
-  return <section className="hero" id="home"><div className="hero-grid" /><div className="hero-copy"><motion.div initial={reduced ? false : {
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: .8
-      }}><p className="eyebrow"><span className="status-dot" /> ADVANCING NEUROTECHNOLOGY</p><h1>SEE THE BRAIN.<br />REIMAGINE<br /><span>WHAT’S POSSIBLE.</span></h1><p className="hero-description">Exploring AI-assisted brain analysis and immersive AR/VR surgical-planning concepts through a new generation of medical technology experiences.</p><div className="hero-actions"><LinkButton href="#features">Explore the technology</LinkButton><a className="text-link" href="#about">Discover our vision <ArrowRight size={16} /></a></div></motion.div><div className="hero-footnote"><span>AI-ASSISTED INSIGHT</span><i /><span>HUMAN-CENTERED EXPLORATION</span></div></div><div className="hero-visual"><div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="scene"><Scene mode={mode} reduced={reduced} /></div><div className="visual-top"><span className="crosshair">+</span> NEURAL VISUALIZATION <span className="accent">LIVE 3D</span></div><div className="annotation annotation-one"><span>CEREBRAL CORTEX</span><i /></div><div className="annotation annotation-two"><i /><span>SPATIAL EXPLORATION</span></div><div className="visual-bottom"><span>FIG. 01 / HUMAN BRAIN<br /><b>ANATOMICALLY INSPIRED MODEL</b></span><span className="coordinates">X 0.24<br />Y 1.08<br />Z 0.62</span></div><div className="view-control" aria-label="Brain viewing mode">{['Anatomy', 'Wireframe', 'Neural'].map((x, i) => <button key={x} onClick={() => setMode(i === 0 ? 0 : i === 1 ? 3 : 4)} aria-pressed={mode === (i === 0 ? 0 : i === 1 ? 3 : 4)}>{x}</button>)}</div></div><a href="#about" className="scroll-cue"><span><ArrowDown size={14} /></span> SCROLL TO EXPLORE</a><span className="hero-index">A NEW PERSPECTIVE ON MEDICINE — 01</span></section>;
+const views=[['Anatomy',0],['Wireframe',3],['Neural',4]];
+export default function Hero({reduced}){
+  const [mode,setMode]=useState(0);
+  const [rotation,setRotation]=useState(0);
+  return <section className="hero" id="home">
+    <div className="hero-copy">
+      <p className="eyebrow">AR MEND / SPATIAL MEDICINE</p>
+      <h1>A clearer view<br/>of the human<br/><em>brain.</em></h1>
+      <p className="hero-description">Exploring how brain anatomy, AI-assisted analysis, and AR/VR could meet in a shared spatial view.</p>
+      <div className="hero-actions"><LinkButton href="#story">Explore the model</LinkButton><a className="text-link" href="#about">The approach <ArrowDown size={16}/></a></div>
+      <p className="hero-scope">An interactive research concept.<br/>Built for exploration, not clinical use.</p>
+    </div>
+    <figure className="hero-visual">
+      <div className="specimen-head"><span>HUMAN BRAIN</span><span>INTERACTIVE STUDY</span></div>
+      <div className="scene"><Scene mode={mode} reduced={reduced} rotation={rotation}/></div>
+      <div className="specimen-controls"><div className="view-control" role="group" aria-label="Brain viewing mode">{views.map(([label,value])=><button key={label} aria-pressed={mode===value} onClick={()=>setMode(value)}>{label}</button>)}</div><div className="rotate-controls"><button aria-label="Rotate model left" onClick={()=>setRotation(rotation-.35)}><ArrowLeft size={16}/></button><button aria-label="Rotate model right" onClick={()=>setRotation(rotation+.35)}><ArrowRight size={16}/></button></div></div>
+      <figcaption><span>Digital anatomy. A different point of view.</span><span>3D / CONCEPT MODEL</span></figcaption>
+    </figure>
+  </section>;
 }
-
-export default Hero;

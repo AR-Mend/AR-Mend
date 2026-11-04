@@ -1,12 +1,7 @@
-import {ArrowUpRight,Check,Plus} from 'lucide-react';
-
-function ProjectScope() {
-  return <section id="project-scope" className="section project-scope">
- <div className="section-heading"><div><p className="eyebrow">WHERE THE PROJECT STANDS</p><h2>Built today.<br /><span>Questions for tomorrow.</span></h2></div><p>Current stage: frontend concept.<br />A working visual experience with a defined scope.</p></div>
- <div className="scope-columns"><div className="scope-column"><span className="scope-label"><Check size={16} /> AVAILABLE IN THIS DEMO</span><ul><li><h3>An interactive model</h3><p>A supplied textured brain with anatomy, wireframe, and neural-style views, plus subtle rotation and pointer response.</p></li><li><h3>A connected explanation</h3><p>Scroll through the conceptual workflow and explore how AI, AR, and VR could play distinct roles.</p></li><li><h3>A responsive website</h3><p>Mobile navigation, keyboard-accessible controls, reduced-motion support, and a clearly labeled contact-form demo.</p></li></ul></div>
- <div className="scope-column"><span className="scope-label proposed"><Plus size={16} /> POSSIBLE NEXT STEPS</span><ul><li><h3>Define a research question</h3><p>Choose a specific educational or research use case before selecting datasets, analysis methods, or success criteria.</p></li><li><h3>Prototype the interaction</h3><p>Explore a dedicated AR or VR experience and test whether its spatial controls and explanations are understandable.</p></li><li><h3>Evaluate with intended users</h3><p>Seek feedback on usability, accessibility, and interpretation. Any clinical direction would require separate expertise and validation.</p></li></ul></div></div>
- <div className="scope-invitation"><p>Have a question that could shape the next iteration?</p><a className="text-link" href="#contact">Share your perspective <ArrowUpRight size={17} /></a></div>
-</section>;
-}
-
-export default ProjectScope;
+import {ArrowUpRight} from 'lucide-react';
+export default function ProjectScope(){return <section id="project-scope" className="section project-scope light-section" data-nav="applications">
+ <div className="section-marker"><p className="eyebrow">PROJECT STATUS</p><span>FRONTEND CONCEPT</span></div>
+ <div className="scope-heading"><h2>A working demonstration.<br/><em>A defined boundary.</em></h2><p>What exists today, and what would need a separate research project.</p></div>
+ <div className="scope-columns"><div><h3>On this website</h3><ul><li>Interactive, textured 3D brain model</li><li>Anatomy, wireframe, and neural-style views</li><li>Conceptual annotations and workflow</li><li>Responsive, keyboard-accessible controls</li></ul></div><div><h3>Possible next steps</h3><ul><li>Define a specific research or educational task</li><li>Establish data permissions and evaluation criteria</li><li>Prototype a dedicated AR or VR interaction</li><li>Review usability and interpretation with intended users</li></ul></div></div>
+ <div className="scope-invitation"><p>No scan upload, AI inference, clinical validation, or headset integration is included.</p><a className="text-link" href="#contact">Ask about the project <ArrowUpRight size={18}/></a></div>
+</section>;}
