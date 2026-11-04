@@ -24,3 +24,4 @@ Footer density: compact vertical padding, a 135px desktop / 120px mobile logo, a
 Brain motion and zoom: slow automatic rotation (0.12 radians/second) pauses during dragging and has a visible pause toggle. Reduced-motion preferences start rotation paused. Zoom buttons and +/- keys support 75–200%; Reset view restores 100% and the initial angle.
 
 Hero viewer: no drag/zoom/pause/reset toolbar; the brain rotates slowly automatically and retains manual rotation. The storytelling viewer keeps its full controls.
+Footer-led framing: black boxed surfaces, violet borders, lavender square accents and subtle circuit corners now connect every section. Panel tokens live in brand-panels.css. The rotating brain, content and compact footer remain.

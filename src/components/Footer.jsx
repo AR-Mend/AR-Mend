@@ -16,9 +16,9 @@ export default function Footer() {
   <div className="footer-main">
    <div className="footer-identity"><Brand/><h2>Where AI meets healthcare.</h2><p>Exploring neurological visualization through artificial intelligence, augmented reality and virtual reality.</p><svg className="footer-pulse" viewBox="0 0 360 50" aria-hidden="true"><path d="M0 30h132l8-7 6 15 8-27 7 35 8-23 7 7h184" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg></div>
    {groups.map(group=><nav className="footer-column" aria-label={group.title+' footer'} key={group.title}><h3>{group.title}</h3><ul>{group.links.map(([label,href,Icon])=><li key={label}><a href={href}><Icon size={23} aria-hidden="true"/><span>{label}</span></a></li>)}</ul></nav>)}
-   <div className="footer-column footer-connect"><h3>Connect with us</h3><a href="https://www.block-up.tech" target="_blank" rel="noreferrer"><Globe size={24} aria-hidden="true"/><span>www.block-up.tech</span></a><p className="footer-partner"><span className="footer-linkedin" aria-hidden="true">in</span>Block Ultimate-Protection</p></div>
+   <div className="footer-column footer-connect"><h3>Connect with us</h3><a href="https://blocks-qa.in/" target="_blank" rel="noreferrer"><Globe size={24} aria-hidden="true"/><span>www.block-up.tech</span></a><p className="footer-partner"><span className="footer-linkedin" aria-hidden="true">in</span>Block Ultimate-Protection</p></div>
   </div>
-  <div className="footer-legal"><span>© {new Date().getFullYear()} AR MEND. All rights reserved.</span><a href="https://www.block-up.tech" target="_blank" rel="noreferrer">Powered by <strong>BLOCK-UP</strong></a><span className="footer-values">Innovation <i/> Intelligence <i/> Healthcare</span></div>
+  <div className="footer-legal"><span>© {new Date().getFullYear()} AR MEND. All rights reserved.</span><a href="https://blocks-qa.in/" target="_blank" rel="noreferrer">Powered by <strong>BLOCK-UP</strong></a><span className="footer-values">Innovation <i/> Intelligence <i/> Healthcare</span></div>
   <p className="footer-disclaimer">Technology concepts only. Not medical advice or a substitute for professional medical evaluation.</p>
  </footer>;
 }
