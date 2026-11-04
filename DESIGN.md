@@ -18,3 +18,4 @@ Restore the compact multi-column footer from the references. Remove the BLOCK-UP
 
 ## Assets and verification
 Locally hosted Inter with SIL license, original transparent logo, cropped SVG favicon and existing model provenance in ASSET-NOTES.md. No remote asset dependencies. Verify build, check.mjs, restored stage controls, preview images, full-width purple navigation, mobile overflow and footer destinations. Do not publish an intermediate withdrawn design.
+The compact model-data panel is removed from the hero; the brain and appearance switcher are centered. The full viewer keeps its separate information panel.
