@@ -66,7 +66,7 @@ function World({mode,reduced,rotation,drag,autoRotate,zoom}){
  {!reduced&&<Sparkles count={30} scale={[6,5,3]} size={1.2} color="#d5acff" opacity={.4} speed={.12}/>}
  </>;
 }
-export default function BrainScene({mode=0,reduced=false}){
+export default function BrainScene({mode=0,reduced=false,showControls=true}){
  const[visible,setVisible]=useState(true),[zoom,setZoom]=useState(1),[autoRotate,setAutoRotate]=useState(!reduced);
  useEffect(()=>setAutoRotate(!reduced),[reduced]);const wrap=useRef(),rotation=useRef({x:.12,y:-.35}),drag=useRef(null),invalidate=useRef(()=>{});
  useEffect(()=>{const ob=new IntersectionObserver(([e])=>setVisible(e.isIntersecting),{rootMargin:'80px'});ob.observe(wrap.current);return()=>ob.disconnect()},[]);
@@ -74,11 +74,11 @@ export default function BrainScene({mode=0,reduced=false}){
  const changeZoom=amount=>setZoom(value=>THREE.MathUtils.clamp(Math.round((value+amount)*100)/100,.75,2));
  const turn=(x,y)=>{rotation.current.x=THREE.MathUtils.clamp(rotation.current.x+x,-Math.PI/2,Math.PI/2);rotation.current.y+=y;invalidate.current()};
  return <div ref={wrap} className="canvas-wrap brain-interactive">
- <div className="brain-viewport" role="group" aria-label="Interactive brain. Drag or use arrow keys to rotate. Use plus and minus to zoom. Press Home to reset." tabIndex={0}
- onKeyDown={e=>{const keys={ArrowLeft:[0,-.35],ArrowRight:[0,.35],ArrowUp:[-.25,0],ArrowDown:[.25,0]};if(keys[e.key]){e.preventDefault();turn(...keys[e.key])}if(e.key==='+'||e.key==='='){e.preventDefault();changeZoom(.15)}if(e.key==='-'){e.preventDefault();changeZoom(-.15)}if(e.key==='Home'){e.preventDefault();reset()}}}
+ <div className="brain-viewport" role="group" aria-label={showControls?"Interactive brain. Drag or use arrow keys to rotate. Use plus and minus to zoom. Press Home to reset.":"Rotating brain. Drag or use arrow keys to rotate. Press Home to reset."} tabIndex={0}
+ onKeyDown={e=>{const keys={ArrowLeft:[0,-.35],ArrowRight:[0,.35],ArrowUp:[-.25,0],ArrowDown:[.25,0]};if(keys[e.key]){e.preventDefault();turn(...keys[e.key])}if(showControls&&(e.key==='+'||e.key==='=')){e.preventDefault();changeZoom(.15)}if(showControls&&e.key==='-'){e.preventDefault();changeZoom(-.15)}if(e.key==='Home'){e.preventDefault();reset()}}}
  onPointerDown={e=>{if(e.button!==0)return;drag.current={x:e.clientX,y:e.clientY};e.currentTarget.setPointerCapture(e.pointerId)}}
  onPointerMove={e=>{if(!drag.current)return;turn((e.clientY-drag.current.y)*.024,(e.clientX-drag.current.x)*.036);drag.current={x:e.clientX,y:e.clientY}}}
  onPointerUp={()=>{drag.current=null}} onPointerCancel={()=>{drag.current=null}} onLostPointerCapture={()=>{drag.current=null}}>
  <Canvas dpr={[1,1.5]} camera={{position:[0,0,8],fov:43}} frameloop={visible&&(!reduced||autoRotate)?'always':'demand'} onCreated={state=>{invalidate.current=state.invalidate}} gl={{antialias:true,alpha:true,powerPreference:'low-power'}} fallback={<div className="fallback">3D visualization unavailable</div>}><World mode={mode} reduced={reduced} rotation={rotation} drag={drag} autoRotate={autoRotate} zoom={zoom}/></Canvas>
- </div><div className="brain-controls"><span className="brain-drag-hint">Drag to rotate</span><div className="brain-zoom-controls" role="group" aria-label="Brain zoom"><button type="button" aria-label="Zoom out" disabled={zoom<=.75} onClick={()=>changeZoom(-.15)}>−</button><output aria-label="Zoom level">{Math.round(zoom*100)}%</output><button type="button" aria-label="Zoom in" disabled={zoom>=2} onClick={()=>changeZoom(.15)}>+</button></div><button type="button" aria-pressed={autoRotate} onClick={()=>setAutoRotate(value=>!value)}>{autoRotate?'Pause rotation':'Auto rotate'}</button><button type="button" onClick={reset}>Reset view</button></div></div>
+ </div>{showControls&&<div className="brain-controls"><span className="brain-drag-hint">Drag to rotate</span><div className="brain-zoom-controls" role="group" aria-label="Brain zoom"><button type="button" aria-label="Zoom out" disabled={zoom<=.75} onClick={()=>changeZoom(-.15)}>−</button><output aria-label="Zoom level">{Math.round(zoom*100)}%</output><button type="button" aria-label="Zoom in" disabled={zoom>=2} onClick={()=>changeZoom(.15)}>+</button></div><button type="button" aria-pressed={autoRotate} onClick={()=>setAutoRotate(value=>!value)}>{autoRotate?'Pause rotation':'Auto rotate'}</button><button type="button" onClick={reset}>Reset view</button></div>}</div>
 }

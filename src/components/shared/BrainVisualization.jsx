@@ -19,9 +19,10 @@ class SceneBoundary extends React.Component {
 
 function Scene({
   mode = 0,
-  reduced = false
+  reduced = false,
+  showControls = true
 }) {
-  return <SceneBoundary><Suspense fallback={<Fallback />}><BrainScene mode={mode} reduced={reduced} /></Suspense></SceneBoundary>;
+  return <SceneBoundary><Suspense fallback={<Fallback />}><BrainScene mode={mode} reduced={reduced} showControls={showControls} /></Suspense></SceneBoundary>;
 }
 
 export default Scene;
