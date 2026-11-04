@@ -20,3 +20,5 @@ The hero and storytelling use the user's human-brain.zip GLB, with embedded text
 The shared scene supports responsive drag rotation (0.036 radians per horizontal pixel, 0.024 vertically), arrow keys, and Reset view. Touch retains vertical page scrolling. Camera fitting reserves a conservative bounding sphere (3.5 units; 3.8 for the paired view) around the complete rotating model at every aspect ratio, including the brainstem. Spatial annotations have neutral surface-landmark labels (illustrative, not anatomical claims); the immersive stage shows a coordinate workspace; the final stage compares textured and wireframe models side by side. All stages retain the complete source geometry.
 
 Footer density: compact vertical padding, a 135px desktop / 120px mobile logo, and tighter link spacing preserve the reference design without a tall closing section.
+
+Brain motion and zoom: slow automatic rotation (0.12 radians/second) pauses during dragging and has a visible pause toggle. Reduced-motion preferences start rotation paused. Zoom buttons and +/- keys support 75–200%; Reset view restores 100% and the initial angle.
