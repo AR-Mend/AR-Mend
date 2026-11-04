@@ -12,7 +12,7 @@ pnpm build
 pnpm preview
 ```
 
-The production output is `dist/`. Deploy this directory to any static host (Cloudflare Pages, Netlify, Vercel, or Sites). No server environment variables are required. Optional: set `VITE_CONTACT_EMAIL` in `.env` before building to display your actual contact email. The form validates locally and never transmits or stores data.
+The production output is `dist/`. Deploy this directory to any static host (Cloudflare Pages, Netlify, Vercel, or Sites). No server environment variables are required. The contact form has been removed. Footer links connect to page sections and the partner website.
 
 ## Brain assets and licensing
 The supplied original is preserved in `public/branding/ar-mend-logo.jpg`. Its transparent-background version, `public/branding/ar-mend-logo-transparent.png`, is used by the shared header/footer Brand component. The site palette follows its black, violet, and lavender colors. Primary CSS accent tokens also drive the 3D lighting and wireframe accent. The favicon uses the same logo image.
@@ -49,7 +49,7 @@ src/
     storytelling.css        Pinned story section
     workflow.css            Workflow steps
     applications.css        Application panels
-    contact.css             Contact form and FAQ
+    faq.css                 FAQ
     footer.css              Footer
     utilities.css           Fallback and skip link
     responsive.css          Canvas sizing, breakpoints, logo sizing

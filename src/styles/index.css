@@ -7,8 +7,10 @@
 @import './storytelling.css';
 @import './workflow.css';
 @import './applications.css';
-@import './contact.css';
-@import './footer.css';
+@import './faq.css';
+
 @import './utilities.css';
 @import './responsive.css';
 @import './content.css';
+
+@import './footer.css';

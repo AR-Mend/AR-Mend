@@ -26,7 +26,7 @@ function Navbar() {
       removeEventListener('scroll', f);
     };
   }, []);
-  return <header className={scrolled ? 'scrolled' : ''}><Brand /><nav aria-label="Main navigation" className={open ? 'nav open' : 'nav'}>{nav.map(n => <a key={n} href={'#' + n.toLowerCase()} className={active === n.toLowerCase() ? 'active' : ''} aria-current={active === n.toLowerCase() ? 'location' : undefined} onClick={() => setOpen(false)}>{n}</a>)}</nav><a href="#contact" className="nav-cta">Let’s connect <ArrowUpRight size={15} /></a><button className="menu" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button></header>;
+  return <header className={scrolled ? 'scrolled' : ''}><Brand /><nav aria-label="Main navigation" className={open ? 'nav open' : 'nav'}>{nav.map(n => <a key={n} href={'#' + n.toLowerCase()} className={active === n.toLowerCase() ? 'active' : ''} aria-current={active === n.toLowerCase() ? 'location' : undefined} onClick={() => setOpen(false)}>{n}</a>)}</nav><a href="#technology-guide" className="nav-cta">Explore the ideas <ArrowUpRight size={15} /></a><button className="menu" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button></header>;
 }
 
 export default Navbar;

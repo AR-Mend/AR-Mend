@@ -1,5 +1,5 @@
 
 
-const nav = ['Home', 'About', 'Features', 'Workflow', 'Applications', 'Contact'];
+const nav = ['Home', 'About', 'Features', 'Workflow', 'Applications'];
 
 export default nav;
