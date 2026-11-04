@@ -1,0 +1,31 @@
+import {useEffect,useRef,useState} from 'react';
+import {gsap,ScrollTrigger} from '../lib/animation.js';
+import Scene from './shared/BrainVisualization.jsx';
+import ModelReadout from './shared/ModelReadout.jsx';
+
+const stages = ['Anatomy', 'Regional view', 'Spatial annotations', 'Wireframe', 'Surface points', 'Immersive environment', 'View comparison'];
+
+function Story({
+  reduced
+}) {
+  const ref = useRef(),
+    [step, setStep] = useState(0);
+  useEffect(() => {
+    if (reduced) return;
+    const ctx = gsap.matchMedia();
+    ctx.add('(min-width: 768px)', () => {
+      ScrollTrigger.create({
+        trigger: ref.current,
+        start: 'top top',
+        end: '+=2400',
+        pin: true,
+        scrub: true,
+        onUpdate: s => setStep(Math.min(6, Math.floor(s.progress * 7)))
+      });
+    });
+    return () => ctx.revert();
+  }, [reduced]);
+  return <section className="story" id="story" ref={ref}><div className="story-top"><p className="eyebrow">A CLOSER LOOK</p><span>SCROLL TO CHANGE YOUR PERSPECTIVE</span></div><div id="viewer" className="story-scene"><Scene mode={step} reduced={reduced} /></div><ModelReadout mode={step}/><div className="story-caption"><span className="eyebrow">0{step + 1} / 07</span><h2>{stages[step]}<span className="accent">.</span></h2><p>{['Begin with the whole. Explore a three-dimensional interpretation of the brain.', 'A different surface tint helps distinguish a second presentation of the same model.', 'Labeled surface landmarks show how notes can stay connected to a 3D object.', 'Look beneath the surface. Discover the geometry of a new perspective.', 'See an abstract point rendering of the model’s surface.', 'A floor grid and spatial frame place the whole model inside a spatial workspace.', 'Compare the textured surface and its wireframe geometry side by side.'][step]}</p></div><div className="story-steps">{stages.map((s, i) => <button key={s} onClick={() => setStep(i)} aria-label={'Show ' + s} aria-pressed={i === step}><span /></button>)}</div></section>;
+}
+
+export default Story;

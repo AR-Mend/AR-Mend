@@ -16,7 +16,7 @@ function Model({mode,position=[0,0,0],scale=1.52}){
   meshes.forEach(mesh=>{
    const clone=source=>{const material=source.clone();materials.push(material);return material};
    mesh.material=Array.isArray(mesh.material)?mesh.material.map(clone):clone(mesh.material);
-   const pointMaterial=new THREE.PointsMaterial({color:'#e9a7a5',size:.016,transparent:true,opacity:.85,depthWrite:false});materials.push(pointMaterial);
+   const pointMaterial=new THREE.PointsMaterial({color:'#c49aef',size:.016,transparent:true,opacity:.85,depthWrite:false});materials.push(pointMaterial);
    const points=new THREE.Points(mesh.geometry,pointMaterial);points.visible=false;mesh.add(points);
   });
   const normalized=new THREE.Group();normalized.scale.setScalar(scale);normalized.position.copy(center).multiplyScalar(-scale);normalized.add(model);
@@ -28,7 +28,7 @@ function Model({mode,position=[0,0,0],scale=1.52}){
   model.traverse(node=>{
    if(node.isMesh)for(const material of Array.isArray(node.material)?node.material:[node.material]){
     material.wireframe=mode===3;material.transparent=mode===4;material.opacity=mode===4?.12:1;material.depthWrite=mode!==4;
-    material.color.set(mode===3?'#e9a7a5':mode===1?'#c790ed':'#eee4f5');
+    material.color.set(mode===3?ACCENT:mode===1?'#c790ed':'#eee4f5');
     material.emissive?.set(mode===1?'#2c0b3d':'#000000');material.needsUpdate=true;
    }
    if(node.isPoints)node.visible=mode===4;
@@ -64,7 +64,7 @@ function World({mode,reduced,rotation,drag,autoRotate,zoom}){
   group.current.rotation.x=reduced?rotation.current.x:THREE.MathUtils.damp(group.current.rotation.x,rotation.current.x,22,delta);
   group.current.rotation.y=reduced?rotation.current.y:THREE.MathUtils.damp(group.current.rotation.y,rotation.current.y,22,delta);
  });
- return <><CameraFit mode={mode} zoom={zoom}/><ambientLight intensity={.85}/><directionalLight position={[-4,5,5]} intensity={2.4} color="#efe0ff"/><pointLight position={[4,1,-2]} intensity={25} color="#d792ab"/>
+ return <><CameraFit mode={mode} zoom={zoom}/><ambientLight intensity={.85}/><directionalLight position={[-4,5,5]} intensity={2.4} color="#efe0ff"/><pointLight position={[4,1,-2]} intensity={25} color="#a469df"/>
  <group ref={group} rotation={[.12,-.35,0]}>
  {mode===6?<><Model mode={0} position={[-1.45,0,0]} scale={.9}/><Model mode={3} position={[1.45,0,0]} scale={.9}/></>:<Model mode={mode} scale={mode===5?1.15:1.52}/>}
  {mode===2&&[-1,1].map(s=><group key={s}><Line points={[[s*.9,.65,.5],[s*1.65,1.35,.5],[s*2.05,1.35,.5]]} color={ACCENT} lineWidth={1.3}/><mesh position={[s*.9,.65,.5]}><sphereGeometry args={[.045,12,12]}/><meshBasicMaterial color="#edd2ff"/></mesh><Html position={[s*1.8,1.58,.5]} center style={{pointerEvents:'none'}}><span className="brain-label">{s===-1?'Surface landmark A':'Surface landmark B'}</span></Html></group>)}

@@ -1,0 +1,7 @@
+import ModelPreview from './shared/ModelPreview.jsx';
+const features=[
+ {image:'wireframe',label:'Spatial geometry',title:'3D wireframe mesh',body:'Reveal the underlying surface mesh. Examine the vertices and triangles that give the brain model its shape.'},
+ {image:'points',label:'Surface point cloud',title:'A different view of form',body:'See the model as a field of surface points. This rendering describes its geometry, not measured neural connections.'},
+ {image:'anatomy',label:'Textured anatomy',title:'The detail of the surface',body:'Explore the visible folds and overall form of the supplied brain. Rotate it to compare the shape from another angle.'}
+];
+export default function Features(){return <section className="features-section" id="features"><div className="section-intro"><p className="section-kicker">Technology & features</p><h2>The science behind the scene.</h2><p>Explore the visualization layers of the AR MEND model, from surface geometry to a spatial point cloud.</p></div><div className="feature-grid">{features.map((item,i)=><article className="feature-card" key={item.image}><span className="feature-symbol" aria-hidden="true">{i===0?'◇':i===1?'⠿':'▱'}</span><ModelPreview view={item.image} alt={item.title+' rendered from the actual AR MEND brain model'}/><p className="feature-category">{item.label}</p><h3>{item.title}</h3><p>{item.body}</p><a href="#viewer">Explore in viewer <span aria-hidden="true">→</span></a></article>)}</div></section>}

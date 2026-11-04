@@ -1,4 +1,1 @@
-export default [
- {label:'Model',id:'model'}, {label:'How it works',id:'how-it-works'},
- {label:'Uses',id:'uses'}, {label:'FAQ',id:'faq'}, {label:'Contact',id:'contact'}
-];
+export default [{label:'Home',id:'model'},{label:'About',id:'about'},{label:'Features',id:'features'},{label:'Workflow',id:'workflow'},{label:'Applications',id:'uses'},{label:'FAQ',id:'faq'}];

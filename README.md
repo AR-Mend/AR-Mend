@@ -1,24 +1,12 @@
 # AR MEND
-Model-led React/Vite presentation for BLOCK-UP.
+React/Vite marketing site for the working AR MEND model by BLOCK-UP.
 
-## Run
-Install dependencies with pnpm, then run pnpm dev. The development URL is http://127.0.0.1:5173/. The existing ngrok hostname is allowed in vite.config.js.
+Run pnpm dev for localhost:5173. Build with pnpm build and verify with node scripts/check.mjs. Static output is dist/. Hosting identity remains in .openai/hosting.json and the allowed ngrok host is preserved in vite.config.js.
 
-## Build and verify
-pnpm build
-node scripts/check.mjs
-Output: dist/. Static hosting settings remain in .openai/hosting.json.
+App.jsx composes Navbar, HeroSection, AboutSection, FeaturesSection, StorytellingSection, WorkflowSection, UsesSection (applications), FAQSection and Footer. The withdrawn four-step redesign and contact form are removed.
 
-## Source
-src/App.jsx composes Navbar, HeroSection, HowItWorks, UsesSection, FAQSection, ContactSection and Footer.
-src/components/shared contains the shared logo, lazy viewer boundary, loading/error state and appearance switcher.
-src/scenes/BrainScene.jsx preserves the supplied model, camera fitting, rotation, zoom and keyboard controls.
-src/styles/design.css owns all design tokens and responsive styles; index.css imports it.
+The existing shared lazy viewer and src/scenes/BrainScene.jsx preserve the supplied GLB, sensitive drag rotation, keyboard support, zoom bounds, pause and reset. The full brain showcase changes stages on desktop scroll and offers stage buttons on mobile. Reduced motion disables auto rotation and pinning.
 
-The four-step viewer uses native sticky positioning and scroll-selected states. No animation library is required for page layout. Reduced motion disables smooth scrolling and initial automatic rotation.
+design.css contains base styles; reference.css provides the current logo-purple futuristic template. Inter is hosted locally. Feature previews in public/previews are 400×400 captures rendered from the actual GLB, not stock or generated illustrations. ModelReadout uses the source model's true geometry counts. The supplied model and asset provenance remain in public/models/.
 
-## Assets
-The supplied GLB is public/models/human-brain.glb. Its provenance is documented in ASSET-NOTES.md. Keep the supplied logo in public/branding; favicon.svg tightly frames it for browser tabs.
-
-## Contact
-The form is a local demo. It validates input and displays a review confirmation; it does not send or store data. Connect a delivery service before using it for enquiries.
+The BLOCK-UP website link is removed from the footer. The credit remains plain text and the LinkedIn link opens a company search because no exact company profile URL was supplied.

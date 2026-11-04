@@ -1,0 +1,6 @@
+import ModelPreview from './ModelPreview.jsx';
+import stats from '../../data/model-stats.json';
+export default function ModelReadout({mode=0,compact=false}){
+ const view=mode===3?'Wireframe mesh':mode===4?'Surface points':mode===2?'Spatial labels':mode===5?'Spatial workspace':mode===6?'View comparison':mode===1?'Surface tint':'Textured surface';
+ return <aside className={compact?'model-readout compact':'model-readout'} aria-label="Model information"><div className="readout-title">AR MEND <span>/ MODEL DATA</span></div>{!compact&&<ModelPreview view="points" alt="Point rendering of the supplied brain model"/>}<p className="readout-caption">GEOMETRY</p><dl><div><dt>Vertices</dt><dd>{stats.vertices.toLocaleString('en-US')}</dd></div><div><dt>Triangles</dt><dd>{stats.triangles.toLocaleString('en-US')}</dd></div><div><dt>Source</dt><dd>{stats.megabytes} MB GLB</dd></div></dl><div className="readout-view"><span>RENDER MODE</span><strong>{view}</strong></div><span className="readout-live"><i/> Interactive 3D</span>{!compact&&<details><summary>Viewing controls</summary><p>Drag or use arrow keys to rotate. Use + / − to zoom. Pause rotation to hold an angle, or reset to return to the start.</p></details>}</aside>;
+}

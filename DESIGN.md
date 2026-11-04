@@ -1,20 +1,20 @@
-# AR MEND — model-led marketing site
-English presentation of the owner's working AR MEND model, by BLOCK-UP. Tagline: Where AI meets healthcare. No invented clinical accuracy, diagnosis or product-integration claims.
+# AR MEND — current design
+An English marketing presentation for the working AR MEND model by BLOCK-UP. Preserve the supplied brain GLB and logo. No invented diagnostic, clinical accuracy or performance claims.
 
-## Approved direction
-The supplied November 4 brief replaces the boxed purple/circuit design. Near-black #08060D, warm brain pink #E9A7A5, readable body #CFC9DC; purple reserved for controls and focus. A light #F0EEE8 Uses section changes the pace. All runtime tokens are owned by src/styles/design.css. Locally hosted Instrument Serif headlines and Inter body, 16–18px. System fallbacks keep text readable while fonts load. SIL Open Font Licenses are included in public/fonts.
+## Current approved direction
+The owner withdrew the earlier serif / light-section / four-step redesign brief. Keep the latest five futuristic image references instead, with the original About, Features, full brain showcase, Workflow, Applications and FAQ structure. There is no Contact form or page and no separate disclaimer band.
 
-## Structure
-Sticky borderless header; large unframed model hero; one four-step How it works explanation with a sticky viewer; plain Uses rows; full-width visible disclaimer; five existing FAQ answers; a simple Contact demo; slim branded footer. Navigation derives the active section from its viewport position. No decorative circuits, feature cards, repeated view explanations, gray split headlines or tiny boxed labels.
+## Visual system
+Inter typography, black/navy atmosphere, lavender and violet accents from the logo, glass-style model panels and subtle orbital/circuit details. No cyan accents. Navigation spans the full page width and includes active dots and animated hover lines. src/styles/design.css owns the base primitives; reference.css owns the latest reference styling and final token overrides. These files are imported in that order by index.css. Body copy stays readable and mobile retains natural page scrolling.
 
-## Viewer
-Preserve public/models/human-brain.glb and the shared React Three Fiber scene. Both hero and guided viewer reuse the same model loader and scene. Modes: textured 0, wireframe 3, points 4, context 2. Scroll selects the closest step; explicit step buttons and appearance buttons remain available. Desktop viewer sticks beside the steps; mobile sticks above them. Controls include sensitive drag rotation, arrow keys, +/- zoom (75–200%), pause and reset. Auto rotation is slow and starts disabled for reduced motion. Lazy loading and recoverable error text reserve viewer space.
+## Brain experience
+Use public/models/human-brain.glb with the existing React Three Fiber model/scene. Hero rotates slowly; the original full-screen seven-stage showcase is restored, with drag, arrow keys, zoom, pause and reset controls. Desktop scroll changes stages; mobile uses explicit stage buttons. Reduced motion disables automatic rotation and pinned storytelling. The scene keeps normalized geometry and fits the camera to the actual maximum vertex radius.
 
-## Contact
-Frontend-only form, no delivery service configured. Disclosure appears before submitting. Validation focuses the first invalid field; success says the message is ready to review and was not sent. Nothing is stored or transmitted. Real delivery requires a configured service.
+## Template panels
+ModelReadout uses real source metadata from model-stats.json: 2,605 vertices and 4,850 triangles, with actual source size and current render mode. No activity percentages, diagnostic labels or synthetic latency numbers. ModelPreview uses 400×400 snapshots rendered directly from the supplied model in textured, wireframe and points modes; CSS tints the static previews to the logo palette. The live model remains genuinely interactive.
 
-## Assets and external links
-Preserve the supplied transparent logo, tightly framed favicon and GLB. Model provenance remains in public/models/ASSET-NOTES.md. Footer uses the website in the approved brief, www.block-up.tech. Exact LinkedIn profile URL was not supplied; the labeled link opens a company search for Block Ultimate-Protection.
+## Footer and copy
+Restore the compact multi-column footer from the references. Remove the BLOCK-UP website link entirely; keep the LinkedIn company-search link and plain BLOCK-UP credit. The exact LinkedIn profile URL was not supplied. Retain working-model marketing copy and explain that surface point graphics are not measured neural activity. The original medical note remains readable in the FAQ. Do not reintroduce frontend-concept or future-prototype positioning.
 
-## Verification
-Build and scripts/check.mjs; test view changes, zoom bounds/reset/pause, scroll-selected steps, active nav, mobile menu, FAQ, invalid and valid form states, mobile overflow and model loading. Keep medical copy prominent and do not imply that points show AI findings.
+## Assets and verification
+Locally hosted Inter with SIL license, original transparent logo, cropped SVG favicon and existing model provenance in ASSET-NOTES.md. No remote asset dependencies. Verify build, check.mjs, restored stage controls, preview images, full-width purple navigation, mobile overflow and footer destinations. Do not publish an intermediate withdrawn design.
