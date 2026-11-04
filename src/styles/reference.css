@@ -53,3 +53,4 @@ main{background:transparent}h1,h2{font-family:var(--body);font-weight:600;letter
 @media(min-width:768px){.hero{min-height:calc(100svh - 82px);padding-top:18px;padding-bottom:56px}.hero-model{--hero-stage-height:clamp(320px,calc(100svh - 170px),650px)}.hero-end{bottom:18px}}
 @media(min-width:768px) and (max-height:600px){.hero{padding-top:10px;padding-bottom:44px}.hero-model{--hero-stage-height:clamp(280px,calc(100svh - 150px),450px)}.hero h1{font-size:clamp(30px,3vw,46px)}.hero-description{margin-top:17px}.hero-description p{font-size:14px;margin-bottom:18px}}
 
+@media(min-width:768px){.story-scene{left:6%}}

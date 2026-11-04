@@ -20,3 +20,4 @@ Restore the compact multi-column footer from the references. Remove the BLOCK-UP
 Locally hosted Inter with SIL license, original transparent logo, cropped SVG favicon and existing model provenance in ASSET-NOTES.md. No remote asset dependencies. Verify build, check.mjs, restored stage controls, preview images, full-width purple navigation, mobile overflow and footer destinations. Do not publish an intermediate withdrawn design.
 The compact model-data panel is removed from the hero; the brain and appearance switcher are centered. The full viewer keeps its separate information panel.
 Hero framing uses a viewport-based stage height and a circle bounded by both available width and height, including its outer halo. Desktop hero fills the viewport below the navbar; mobile keeps natural content height without clipped decoration.
+All model-data readout panels are now removed, including the full brain showcase panel. The full viewer is centered across the available width.
