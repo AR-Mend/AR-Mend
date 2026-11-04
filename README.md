@@ -15,7 +15,7 @@ pnpm preview
 The production output is `dist/`. Deploy this directory to any static host (Cloudflare Pages, Netlify, Vercel, or Sites). No server environment variables are required. Optional: set `VITE_CONTACT_EMAIL` in `.env` before building to display your actual contact email. The form validates locally and never transmits or stores data.
 
 ## Brain assets and licensing
-The supplied AR MEND logo is preserved in `public/branding/ar-mend-logo.jpg` and displayed by the shared header/footer Brand component. The site palette follows its black, violet, and lavender colors. Primary CSS accent tokens also drive the 3D lighting and wireframe accent. The favicon uses the same logo image.
+The supplied original is preserved in `public/branding/ar-mend-logo.jpg`. Its transparent-background version, `public/branding/ar-mend-logo-transparent.png`, is used by the shared header/footer Brand component. The site palette follows its black, violet, and lavender colors. Primary CSS accent tokens also drive the 3D lighting and wireframe accent. The favicon uses the same logo image.
 
 The hero and storytelling now use the textured GLB supplied in human-brain.zip, served from `public/models/human-brain.glb`. Its 2,605 vertices and 4,850 triangles retain the embedded diffuse and normal textures. A compatibility conversion replaces the legacy specular/gloss extension with core glTF shading. The model is a visualization, not a medically accurate anatomical reference. The archive did not include author or license information; provenance is recorded in `public/models/ASSET-NOTES.md`. Third-party dependencies retain their respective package licenses.
 
@@ -60,4 +60,5 @@ src/
 
 ## Scope
 No clinical validation is claimed. This project is not a medical device, does not provide diagnosis or medical advice, and does not replace professional evaluation. The separate referenced project-plan attachment was not provided; implementation follows the full pasted specification.
+
 

@@ -9,7 +9,8 @@ for(const asset of ['src/App.jsx','src/styles/index.css','src/scenes/BrainScene.
 for(const asset of [...readFileSync('dist/index.html','utf8').matchAll(/(?:src|href)="(\/assets\/[^\"]+)"/g)])assert(existsSync('dist'+asset[1]),`Broken asset ${asset[1]}`);
 assert(app.includes('No messages are sent or stored.'));
 assert(app.includes('aria-invalid'));
-assert(existsSync('dist/branding/ar-mend-logo.jpg'),'Missing deployed logo');
+assert(existsSync('dist/branding/ar-mend-logo-transparent.png'),'Missing deployed transparent logo');
+assert(!app.includes('/branding/ar-mend-logo.jpg'),'Opaque logo still used by a component');
 assert.equal((app.match(/<Brand\s*\/>/g)||[]).length,2,'Header and footer must share the logo');
 const css=readdirSync('src/styles').filter(file=>file.endsWith('.css')).map(file=>readFileSync(path.join('src/styles',file),'utf8')).join('\n');
 assert(css.includes('--accent:#c77dff'),'Logo lavender accent missing');
