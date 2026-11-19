@@ -2,7 +2,7 @@
 An English marketing presentation for the working AR MEND model by BLOCK-UP. Preserve the supplied brain GLB and logo. No invented diagnostic, clinical accuracy or performance claims.
 
 ## Current approved direction
-The owner withdrew the earlier serif / light-section / four-step redesign brief. Keep the latest five futuristic image references instead, with the About, Features, full brain showcase, Workflow and FAQ structure. There is no Applications or Contact page and no separate disclaimer band.
+The owner withdrew the earlier serif / light-section / four-step redesign brief. Keep the latest five futuristic image references for the home page: About, Features, full brain showcase, Workflow and FAQ. Dedicated Contact, Privacy Policy and Terms & Conditions pages are available at `/contact/`, `/privacy-policy/` and `/terms-and-conditions/`. The Contact page uses direct email and phone links rather than a form; keep the medical disclaimer in the FAQ and footer.
 
 ## Visual system
 Inter typography, black/navy atmosphere, lavender and violet accents from the logo, glass-style model panels and subtle orbital/circuit details. No cyan accents. Navigation spans the full page width and includes active dots and animated hover lines. src/styles/design.css owns the base primitives; reference.css owns the latest reference styling and final token overrides. These files are imported in that order by index.css. Body copy stays readable and mobile retains natural page scrolling.
