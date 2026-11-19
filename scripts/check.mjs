@@ -3,11 +3,13 @@ import {readFileSync,existsSync,readdirSync} from 'node:fs';
 import path from 'node:path';
 function sourceFiles(dir){return readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?sourceFiles(path.join(dir,e.name)):/\.(jsx|js)$/.test(e.name)?[path.join(dir,e.name)]:[])}
 const files=sourceFiles('src'),app=files.map(f=>readFileSync(f,'utf8')).join('\n');
-for(const id of ['model','about','features','story','viewer','workflow','uses','faq'])assert(app.includes('id="'+id+'"'),'Missing '+id);
+for(const id of ['model','about','features','story','viewer','workflow','faq'])assert(app.includes('id="'+id+'"'),'Missing '+id);
 for(const file of files)for(const match of readFileSync(file,'utf8').matchAll(/(?:from\s*|import\s*\()(['"])(\.[^'"]+)\1/g))assert(existsSync(path.resolve(path.dirname(file),match[2])),'Broken import: '+file);
 assert(!app.includes('id="contact"'),'Withdrawn brief contact form remains');
 assert(!app.includes('href="#contact"'),'Removed contact form is linked');
 assert(!app.includes('href="#how-it-works"'),'Withdrawn guide section is linked');
+assert(!app.includes('id="uses"'),'Removed Applications section remains');
+assert(!app.includes('href="#uses"'),'Removed Applications section is linked');
 assert(app.includes('id="story"'),'Original full brain showcase missing');
 assert(app.includes('not an AI result')||app.includes('not represent measured brain activity'),'Model interpretation explanation missing');
 assert.equal((app.match(/<Brand\s*\/>/g)||[]).length,2);

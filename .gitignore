@@ -1,4 +1,39 @@
+# Dependencies
 node_modules/
+.pnpm-store/
+
+# Vite and build output
 dist/
+.vite/
 .sites/
 *.tar.gz
+
+# Local environment files and secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# Logs and caches
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+.cache/
+coverage/
+
+# Local generated reports
+/outputs/
+/premium-audit.json
+
+# Test output
+/playwright-report/
+/test-results/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
