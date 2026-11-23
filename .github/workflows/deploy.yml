@@ -32,7 +32,7 @@ jobs:
         run: pnpm build
       - name: Create page entry points
         run: |
-          for route in contact privacy-policy terms-and-conditions; do
+          for route in contact privacy-policy terms-and-conditions technology/ar-vr technology/ai solutions/hms solutions/pms solutions/phms; do
             mkdir -p "dist/$route"
             cp dist/index.html "dist/$route/index.html"
           done

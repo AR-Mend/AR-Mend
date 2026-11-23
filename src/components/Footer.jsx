@@ -1,8 +1,35 @@
-import {Home,Info,Layers,Box,BookOpen,Brain,Mail,Phone,ShieldCheck,FileText} from 'lucide-react';
+import {Home,Info,Layers,Box,BookOpen,Brain,Mail,Phone,ShieldCheck,FileText,ArrowUpRight} from 'lucide-react';
 import Brand from './shared/Brand.jsx';
+import {offeringGroups} from '../data/offerings.js';
+
 const groups=[
- {title:'Explore',links:[['Home','#model',Home],['About the model','#features',Info],['Workflow','#workflow',Layers]]},
- {title:'Our technology',links:[['Model views','#viewer',Box],['Spatial visualization','#viewer',Layers],['AI, AR & VR','#features',Brain]]},
- {title:'Resources',links:[['FAQs','#faq',BookOpen],['How it works','#workflow',Layers],['About AR MEND','#about',Info],['Privacy Policy','privacy-policy/',ShieldCheck],['Terms & Conditions','terms-and-conditions/',FileText]]}
+  {title:'Explore',links:[['Home','#model',Home],['About the model','#features',Info],['Workflow','#workflow',Layers]]},
+  ...offeringGroups.map(group=>({title:group.title,links:group.pages.map(page=>[page.label,page.href,ArrowUpRight])})),
+  {title:'Resources',links:[['FAQs','#faq',BookOpen],['How it works','#workflow',Layers],['Privacy Policy','privacy-policy/',ShieldCheck],['Terms & Conditions','terms-and-conditions/',FileText]]},
 ];
-export default function Footer(){return <footer className="site-footer"><div className="footer-circuit" aria-hidden="true"/><div className="footer-top"><div className="footer-identity"><Brand/><h3>Where AI meets healthcare.</h3><p>AI-assisted imaging, spatial visualization and immersive learning for the brain.</p><svg className="footer-pulse" viewBox="0 0 280 40" aria-hidden="true"><path d="M0 22h95l8-7 7 17 8-27 7 32 9-21 8 6h138" fill="none" stroke="currentColor"/></svg></div>{groups.map(group=><nav className="footer-column" aria-label={group.title+' footer'} key={group.title}><h3>{group.title}</h3>{group.links.map(([label,href,Icon])=><a href={'/'+href} key={label}><Icon size={18} aria-hidden="true"/>{label}</a>)}</nav>)}<div className="footer-column footer-connect"><h3>Connect with us</h3><a href="mailto:saas@armend.in"><Mail size={18} aria-hidden="true"/>saas@armend.in</a><a href="tel:+916380436024"><Phone size={18} aria-hidden="true"/>+91 6380436024</a><a href="/contact/">Contact AR MEND</a></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} AR MEND. All rights reserved.</span><span>Powered by Elvrix Inc.</span><span>Innovation · Intelligence · Healthcare</span></div><p className="footer-note">Interactive model presentation. Surface colors and points are illustrative, not diagnostic findings. Not medical advice.</p></footer>}
+
+export default function Footer(){
+  return <footer className="site-footer">
+    <div className="footer-circuit" aria-hidden="true"/>
+    <div className="footer-top">
+      <div className="footer-identity">
+        <Brand/>
+        <h3>Where AI meets healthcare.</h3>
+        <p>AI-assisted imaging, spatial visualization and immersive learning for the brain.</p>
+        <svg className="footer-pulse" viewBox="0 0 280 40" aria-hidden="true"><path d="M0 22h95l8-7 7 17 8-27 7 32 9-21 8 6h138" fill="none" stroke="currentColor"/></svg>
+      </div>
+      {groups.map(group=><nav className="footer-column" aria-label={`${group.title} footer`} key={group.title}>
+        <h3>{group.title}</h3>
+        {group.links.map(([label,href,Icon])=><a href={href.startsWith('/')?href:`/${href}`} key={label}><Icon size={18} aria-hidden="true"/>{label}</a>)}
+      </nav>)}
+      <div className="footer-column footer-connect">
+        <h3>Connect with us</h3>
+        <a href="mailto:saas@armend.in"><Mail size={18} aria-hidden="true"/>saas@armend.in</a>
+        <a href="tel:+916380436024"><Phone size={18} aria-hidden="true"/>+91 6380436024</a>
+        <a href="/contact/">Contact AR MEND</a>
+      </div>
+    </div>
+    <div className="footer-bottom"><span>© {new Date().getFullYear()} AR MEND. All rights reserved.</span><span>Powered by Elvrix Inc.</span><span>Innovation · Intelligence · Healthcare</span></div>
+    <p className="footer-note">Interactive model presentation. Surface colors and points are illustrative, not diagnostic findings. Not medical advice.</p>
+  </footer>;
+}
