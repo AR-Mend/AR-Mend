@@ -2,16 +2,16 @@ export const offeringGroups = [
   {
     title: 'Technology',
     pages: [
-      { label: 'AR & VR', href: '/technology/ar-vr/' },
-      { label: 'AI imaging', href: '/technology/ai/' },
+      { label: 'AR & VR', href: '/#technology-ar-vr' },
+      { label: 'AI imaging', href: '/#technology-ai' },
     ],
   },
   {
     title: 'SaaS systems',
     pages: [
-      { label: 'Hospital Management System', href: '/solutions/hms/' },
-      { label: 'Patient Management System', href: '/solutions/pms/' },
-      { label: 'Pharmacy Management System', href: '/solutions/phms/' },
+      { label: 'Hospital Management System', href: '/#solutions-hms' },
+      { label: 'Patient Management System', href: '/#solutions-pms' },
+      { label: 'Pharmacy Management System', href: '/#solutions-phms' },
     ],
   },
 ];

@@ -8,17 +8,13 @@ import Workflow from './components/WorkflowSection.jsx';
 import FAQ from './components/FAQSection.jsx';
 import ContactPage from './components/ContactPage.jsx';
 import LegalPage from './components/LegalPage.jsx';
-import OfferingPage from './components/OfferingPage.jsx';
 import Footer from './components/Footer.jsx';
-import {offerings} from './data/offerings.js';
 
 export default function App(){
   const reduced=useReducedMotion();
   const path=window.location.pathname.replace(/\/+$/,'')||'/';
-  const offering=offerings.find(page=>page.path===path);
   if(path==='/contact')return <ContactPage/>;
   if(path==='/privacy-policy')return <LegalPage type="privacy"/>;
   if(path==='/terms-and-conditions')return <LegalPage type="terms"/>;
-  if(offering)return <OfferingPage page={offering}/>;
   return <><a className="skip-link" href="#model">Skip to content</a><Navbar/><main><Hero reduced={reduced}/><About/><Features/><Story reduced={reduced}/><Workflow/><FAQ/></main><Footer/></>;
 }
